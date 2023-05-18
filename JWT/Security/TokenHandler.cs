@@ -13,12 +13,11 @@ namespace JWT.Security
         {
             Token token = new Token();
 
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecurityKey"]));
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:SecurityKey"]));
 
             SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            token.Expiration = DateTime.UtcNow.AddMinutes(Convert.ToInt16(
-                configuration["Jwt:Expiration"]));
+            token.Expiration = DateTime.UtcNow.AddMinutes(Convert.ToInt16(configuration["Token:Expiration"]));
 
             JwtSecurityToken jwtSecurityToken = new(
                 issuer: configuration["Token:Issuer"],
